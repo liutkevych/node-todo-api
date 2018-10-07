@@ -121,7 +121,10 @@ app.post('/users', (req, res) => {
   })
 });
 
-// Post /users/login {email, password}
+app.get('/users/me', authenticate, (req, res) => {
+  res.send(req.user);
+});
+
 app.post('/users/login', (req, res) => {
   var body = _.pick(req.body, ['email', 'password']);
 
@@ -132,10 +135,6 @@ app.post('/users/login', (req, res) => {
   }).catch((e) => {
     res.status(400).send();
   });
-});
-
-app.get('/users/me', authenticate, (req, res) => {
-  res.send(req.user);
 });
 
 app.delete('/users/me/token', authenticate, (req, res) => {
