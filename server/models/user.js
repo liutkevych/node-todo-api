@@ -59,7 +59,7 @@ UserSchema.methods.removeToken = function(token) {
 
   return user.update({
     $pull: {
-      todens: { token }
+      tokens: { token }
     }
   });
 };
